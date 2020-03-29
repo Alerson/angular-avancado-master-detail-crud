@@ -21,7 +21,7 @@ export class CategorieService {
     return this.http.get(this.apiPath).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategories)
-    );
+    )
 
   }
 
@@ -32,7 +32,7 @@ export class CategorieService {
     return this.http.get(url).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategorie)
-    );
+    )
 
   }
 
@@ -42,7 +42,7 @@ export class CategorieService {
     return this.http.post(this.apiPath, categorie).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategorie)
-    );
+    )
 
   }
 
@@ -53,7 +53,7 @@ export class CategorieService {
     return this.http.put(url, categorie).pipe(
       catchError(this.handleError),
       map(() => categorie)
-    );
+    )
 
   }
 
@@ -64,7 +64,7 @@ export class CategorieService {
     return this.http.delete(url).pipe(
       catchError(this.handleError),
       map(() => null)
-    );
+    )
 
   }
 
