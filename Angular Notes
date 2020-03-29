@@ -1,0 +1,22 @@
+Github do curso de Angular Avançado Udemy
+https://github.com/costanonato/angular-avancado-master-detail-crud
+
+- app.component.html (Página html principal do projeto)
+
+- app-routing.modules.ts (Arquivo principal de rotas)
+
+- Criação módulo de categorias
+    ng generate module pages/categories --routing
+
+- Criação de componentes
+    - Cada componete contem seus próprios arquivos de configuração de layout,que são:
+        component.css
+        component.ts (type script)
+        component.html (pagina do componente)
+
+    - Componente categories
+        ng generate component pages/categories/categorie-list
+        ng generate component pages/categories/categorie-form
+
+- Criação do serviço
+    - ng generate service pages/categories/shared/categorie 
