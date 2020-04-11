@@ -15,7 +15,7 @@
 <div class="row mb-4"> <!-- LINHA -->
     <div class="col-md">
         <h1 class="h2 border-left pl-2">
-            Formulário de Categoria
+            Formulário de Categoria {{currentAction}}
         </h1>
     </div>
     <div class="col-md">
@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<form>
+<form [formGroup] = "categorieForm">
 
     <div class="card mb-3">
         <div class="card-header">

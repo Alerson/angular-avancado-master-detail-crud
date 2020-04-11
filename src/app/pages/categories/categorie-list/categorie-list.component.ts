@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Categorie } from '../shared/categorie.model';
-import { CategorieService } from '..//shared/categorie.service';
+import { CategorieService } from '../shared/categorie.service';
 
 @Component({
   selector: 'app-categorie-list',
