@@ -6,10 +6,14 @@ import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@ang
 // OBJETOS RESPONSÁVEI POR GERENCIAR AS ROTAS
 import { ActivatedRoute, Router } from '@angular/router'
 
+
+import toastr from 'toastr';
+
 import { switchMap } from 'rxjs/operators'
 
 import { Categorie } from '../shared/categorie.model';
 import { CategorieService } from '../shared/categorie.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-categorie-form',
@@ -45,7 +49,59 @@ export class CategorieFormComponent implements OnInit, AfterContentChecked {
     this.setPageTitle();
   }
 
+  // METODO ACIONADO AO CLICAR NO BOTÃO SALVAR
+  submitForm(){
+    this.submittingForm = true;
+    if (this.currentAction == 'new') {
+      this.createCategorie();
+    } else {
+      this.updateCategorie();
+    }
+  }
+
   // PRIVATE METHODS
+
+  // CRIA UMA CATEGORIA NOVA
+  private createCategorie() {
+    
+    // ESSA FUNÇÃO É RESPONSÁVE POR PEGAR OS VALORES DO FORM E COLOCAR DENTRO DA CONSTANTE CATEGORIE 
+    const categorie: Categorie = Object.assign(new Categorie, this.categorieForm.value);
+
+    this.categorieService.create(categorie).subscribe(
+      (categorie) => this.actionForSuccess(categorie),
+      (error) => this.actionForError(error)
+    )
+
+  }
+
+  // EDITA UMA CATEGORIA EXISTENTE 
+  private updateCategorie() {
+    throw new Error("Method not implemented.");
+  }
+
+  private actionForSuccess(categorie: Categorie): void {
+    toastr.success('Solicitação processada com sucesso!');
+
+    // RELOADED DA PAGINA PARA A PAGINA 'CATEGORIES' E NOVAMENTE PARA A PAGINA CATEGORIES/ID/EDIT,
+    // TUDO ISSO REALIZADO SEM A PERCEPÇÃO DO USUÁRIO
+    // FUNÇÃO skipLocationChange: true, É PARA NÃO DEIXAR O BROWSER GRAVAR ESSA NAVEGAÇÃO DO RELOADED,
+    // PARA O CASO DO USUÁRIO APERTAR O BOTÃO VOLTAR
+    this.router.navigateByUrl('categories', {skipLocationChange: true}).then(
+      () => this.router.navigate(['categories', categorie.id, 'edit'])
+    )
+  }
+
+  private actionForError(error: any): void {
+    toastr.error('Ocorreu um erro ao processar sua solicitação!');
+
+    this.submittingForm = false;
+
+    if (error.status === 422) {
+      this.serverErrorMessages = JSON.parse(error._body).errors;
+    } else {
+      this.serverErrorMessages = ['Falha na comunicação com o servidor, por favor tente mais tarde.'];
+    }
+  }
 
   // VERIFICA O TIPO DE AÇÃO QUE O USUÁRIO QUER EXECUTAR (EDIÇÃO OU INSERÇÃO)
   private setCurrentAction() {
