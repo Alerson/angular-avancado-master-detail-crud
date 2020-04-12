@@ -76,7 +76,14 @@ export class CategorieFormComponent implements OnInit, AfterContentChecked {
 
   // EDITA UMA CATEGORIA EXISTENTE 
   private updateCategorie() {
-    throw new Error("Method not implemented.");
+
+    // ESSA FUNÇÃO É RESPONSÁVE POR PEGAR OS VALORES DO FORM E COLOCAR DENTRO DA CONSTANTE CATEGORIE
+    const categorie: Categorie = Object.assign(new Categorie, this.categorieForm.value);
+
+    this.categorieService.update(categorie).subscribe(
+      (categorie) => this.actionForSuccess(categorie),
+      (error) => this.actionForError(error)
+    )
   }
 
   private actionForSuccess(categorie: Categorie): void {
