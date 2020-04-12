@@ -11,7 +11,7 @@ import { element } from 'protractor';
 })
 export class CategorieService {
 
-  private apiPath: string = "api/categories";
+  private apiPath: string = 'api/categories';
 
   constructor(private http: HttpClient) { }
 

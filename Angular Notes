@@ -5,8 +5,14 @@ https://github.com/costanonato/angular-avancado-master-detail-crud
 
 - app-routing.modules.ts (Arquivo principal de rotas)
 
+- Comandos
+    -- routing (responsável por gerar o submodulo de rotas)
+
 - Criação módulo de categorias
     ng generate module pages/categories --routing
+
+- Criação módulo de lançamentos
+    ng generate module pages/entries --routing
 
 - Criação de componentes
     - Cada componete contem seus próprios arquivos de configuração de layout,que são:
@@ -18,5 +24,6 @@ https://github.com/costanonato/angular-avancado-master-detail-crud
         ng generate component pages/categories/categorie-list
         ng generate component pages/categories/categorie-form
 
-- Criação do serviço
-    - ng generate service pages/categories/shared/categorie 
+- Criação de serviço (Módulo responsável por acessar os serviços REST)
+    - ng generate service pages/categories/shared/categorie
+    - ng generate service pages/entries/shared/entry
